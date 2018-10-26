@@ -3,6 +3,11 @@
 		<div class="container">
 			<div class="columns">
 				<div class="column">
+					<find></find>
+				</div>
+			</div>
+			<div class="columns">
+				<div class="column">
 					<org></org>
 				</div>
 				<div class="column">
@@ -17,6 +22,7 @@
 </template>
 
 <script>
+import find from './parts/Find'
 import org from './parts/OrgPanel'
 import people from './parts/PeoplePanel'
 import paper from './parts/PaperPanel'
@@ -24,6 +30,7 @@ import paper from './parts/PaperPanel'
 export default {
   name: 'HelloWorld',
 	components: {
+		find,
 		org,
 		people,
 		paper

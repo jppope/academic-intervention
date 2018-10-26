@@ -1,67 +1,37 @@
 <template>
 	<nav class="panel">
-  <p class="panel-heading">
-    repositories
+  <p class="panel-heading has-text-centered">
+    Top Papers
   </p>
-  <div class="panel-block">
-    <p class="control has-icons-left">
-      <input class="input is-small" type="text" placeholder="search">
-      <span class="icon is-small is-left">
-        <i class="fas fa-search" aria-hidden="true"></i>
-      </span>
-    </p>
-  </div>
-  <p class="panel-tabs">
-    <a class="is-active">all</a>
-    <a>public</a>
-    <a>private</a>
-    <a>sources</a>
-    <a>forks</a>
-  </p>
-  <a class="panel-block is-active">
+  <a class="panel-block is-active" v-for="(paper, index) in fakePapers" :key="index">
     <span class="panel-icon">
       <i class="fas fa-book" aria-hidden="true"></i>
     </span>
-    bulma
+    {{paper}}
   </a>
-  <a class="panel-block">
-    <span class="panel-icon">
-      <i class="fas fa-book" aria-hidden="true"></i>
-    </span>
-    marksheet
-  </a>
-  <a class="panel-block">
-    <span class="panel-icon">
-      <i class="fas fa-book" aria-hidden="true"></i>
-    </span>
-    minireset.css
-  </a>
-  <a class="panel-block">
-    <span class="panel-icon">
-      <i class="fas fa-book" aria-hidden="true"></i>
-    </span>
-    jgthms.github.io
-  </a>
-  <a class="panel-block">
-    <span class="panel-icon">
-      <i class="fas fa-code-branch" aria-hidden="true"></i>
-    </span>
-    daniellowtw/infboard
-  </a>
-  <a class="panel-block">
-    <span class="panel-icon">
-      <i class="fas fa-code-branch" aria-hidden="true"></i>
-    </span>
-    mojs
-  </a>
-  <label class="panel-block">
-    <input type="checkbox">
-    remember me
-  </label>
-  <div class="panel-block">
+	<div class="panel-block">
     <button class="button is-link is-outlined is-fullwidth">
-      reset all filters
+      More Papers...
     </button>
   </div>
 </nav>
 </template>
+<script>
+export default {
+	data(){
+		return {
+			fakePapers: [
+				'Associations of fats and carbohydrate...',
+				'Feathered Dinosaur Tail',
+				'Neuroparalisis in endometriosis',
+				'Meta analysis of Exestentialism',
+				'Adversarial methods in Machine Learning',
+				'New RNA embeded structures',
+				'Glycemic Responses of Top Performers',
+				'Patterns of genic intolerance in 59,898 human exomes'
+			]
+		}
+	}
+}
+</script>
+
