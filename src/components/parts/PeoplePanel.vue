@@ -5,9 +5,9 @@
   </p>
   <a class="panel-block is-active" v-for="(paper, index) in fakeAcademics" :key="index">
     <span class="panel-icon">
-      <i class="fas fa-book" aria-hidden="true"></i>
+      <i class="fas fa-user" aria-hidden="true"></i>
     </span>
-    {{paper}}
+		{{paper}}
   </a>
 	<div class="panel-block">
     <button class="button is-link is-outlined is-fullwidth">

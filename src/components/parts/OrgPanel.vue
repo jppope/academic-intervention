@@ -5,7 +5,7 @@
   </p>
   <a class="panel-block is-active" v-for="(paper, index) in fakeOrganizations" :key="index">
     <span class="panel-icon">
-      <i class="fas fa-book" aria-hidden="true"></i>
+      <i class="fas fa-university"></i>
     </span>
     {{paper}}
   </a>
