@@ -1,0 +1,3 @@
+[submodule "serverless-nodejs-starter"]
+	path = serverless-nodejs-starter
+	url = https://github.com/AnomalyInnovations/serverless-nodejs-starter
