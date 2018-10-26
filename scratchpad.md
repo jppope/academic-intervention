@@ -30,3 +30,17 @@ site
 github repo
 favorite_papers
 
+### Papers
+Title
+Owner
+Citations
+Reviews
+Links
+comments?/ info 
+    Popularity Metric? 
+
+Relationships
+
+Paper has one User   <=> User has many Paper
+
+User has many Organizations  <=> Organizations have many Users
