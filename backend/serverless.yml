@@ -12,6 +12,7 @@ custom:
   webpack:
     webpackConfig: ./webpack.config.js
     includeModules: true
+  secrets: ${file(secrets.json)}
 
 provider:
   name: aws
@@ -24,6 +25,8 @@ provider:
   # commit your env.yml.
   #
   #environment: ${file(env.yml):${self:provider.stage}}
+	environment:
+			JWT_SECRET: ${self:custom.secrets.jwtSecret}
 
 functions:
   hello:
@@ -32,3 +35,28 @@ functions:
       - http:
           path: hello
           method: get
+  login:
+    handler: functions/login.handler
+    events:
+      - http:
+          path: sessions
+          method: post
+          cors: true
+  authorize:
+    handler: functions/authorize.handler
+  getCats:
+    handler: functions/getCats.handler
+    events:
+      - http:
+          path: cats
+          method: get
+          cors: true
+          # authorizer: authorize # Cats are public
+  getPangolins:
+    handler: functions/getPangolins.handler
+    events:
+      - http:
+          path: pangolins
+          method: get
+          cors: true
+          authorizer: authorize # Pangolins are protected
