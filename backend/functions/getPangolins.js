@@ -1,3 +1,4 @@
+
 /**
   * GET /pangolins
   *
@@ -5,6 +6,7 @@
   * @returns {Array.Object}
   */
 module.exports.handler = (event, context, callback) => {
+
   console.log('getPangolins');
   console.log(event);
 

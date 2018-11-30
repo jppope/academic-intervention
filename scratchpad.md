@@ -1,5 +1,4 @@
 
-
 ## Data Model
 
 ### Group name
@@ -36,8 +35,8 @@ Owner
 Citations
 Reviews
 Links
-comments?/ info 
-    Popularity Metric? 
+comments?/ info
+    Popularity Metric?
 
 Relationships
 

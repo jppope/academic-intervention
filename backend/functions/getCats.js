@@ -1,3 +1,4 @@
+
 /**
   * GET /cats
   *
@@ -5,7 +6,10 @@
   * @returns {Array.Object}
   */
 module.exports.handler = (event, context, callback) => {
-  console.log('getCats');
+	let url = process.env.DB;
+	console.log(url);
+	// console.log(conn(url));
+
   const response = {
     statusCode: 200,
     headers: {
@@ -15,6 +19,7 @@ module.exports.handler = (event, context, callback) => {
       cats: [
         {
           id: 1,
+					something: url,
           name: 'Furball',
           address: '2 Fur Lane',
         },

@@ -50,4 +50,4 @@ env.yml
 
 # Jetbrains IDEs
 .idea
-secrets.json
+env.yml
