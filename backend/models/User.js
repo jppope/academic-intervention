@@ -25,11 +25,11 @@ module.exports = function (sequelize, DataTypes) {
 		},
 		group: {
 			type: DataTypes.STRING(255),
-			allowNull: false
+			allowNull: true
 		},
 		account: {
 			type: DataTypes.INTEGER(11),
-			allowNull: false
+			allowNull: true
 		},
 		verified: {
 			type: DataTypes.INTEGER(1),
@@ -52,15 +52,15 @@ module.exports = function (sequelize, DataTypes) {
 			allowNull: true
 		},
 		show_email: {
-			type: DataType.TINYINT(1),
-			allowNull: false
+			type: DataTypes.TINYINT(1),
+			allowNull: true
 		},
 		show_phone: {
 			type: DataTypes.TINYINT(1),
 			allowNull: true
 		},
 		desc: {
-			type: DataTypes.MEDIUMTEXT,
+			type: DataTypes.TEXT('medium'),
 			allowNull: true
 		},
 		site: {
@@ -68,11 +68,11 @@ module.exports = function (sequelize, DataTypes) {
 			allowNull: true
 		},
 		github_repo: {
-			type: DataTypes.LONGTEXT,
+			type: DataTypes.TEXT('long'),
 			allowNull: true
 		},
 		favorite_papers: {
-			type: DateTypes.TEXT,
+			type: DataTypes.TEXT,
 			allowNull: true
 		}
 	}, {

@@ -12,21 +12,19 @@ custom:
   webpack:
     webpackConfig: ./webpack.config.js
     includeModules: true
-  secrets: ${file(secrets.json)}
 
 provider:
   name: aws
   runtime: nodejs8.10
   stage: dev
-  region: us-east-1
+  region: us-west-2
   # To load environment variables externally
   # rename env.example to env.yml and uncomment
   # the following line. Also, make sure to not
   # commit your env.yml.
   #
-  #environment: ${file(env.yml):${self:provider.stage}}
-	environment:
-			JWT_SECRET: ${self:custom.secrets.jwtSecret}
+	environment: ${file(env.yml):${self:custom.stage}}
+
 
 functions:
   hello:
@@ -36,16 +34,16 @@ functions:
           path: hello
           method: get
   login:
-    handler: functions/login.handler
+    handler: controllers/login.handler
     events:
       - http:
           path: sessions
           method: post
           cors: true
   authorize:
-    handler: functions/authorize.handler
+    handler: controllers/authorize.handler
   getCats:
-    handler: functions/getCats.handler
+    handler: controllers/getCats.handler
     events:
       - http:
           path: cats
@@ -53,7 +51,7 @@ functions:
           cors: true
           # authorizer: authorize # Cats are public
   getPangolins:
-    handler: functions/getPangolins.handler
+    handler: controllers/getPangolins.handler
     events:
       - http:
           path: pangolins
