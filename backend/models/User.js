@@ -52,7 +52,7 @@ module.exports = function (sequelize, DataTypes) {
 			allowNull: true
 		},
 		show_email: {
-			type: DataType.TINYINT(1),
+			type: DataTypes.TINYINT(1),
 			allowNull: false
 		},
 		show_phone: {
@@ -60,7 +60,7 @@ module.exports = function (sequelize, DataTypes) {
 			allowNull: true
 		},
 		desc: {
-			type: DataTypes.MEDIUMTEXT,
+			type: DataTypes.TEXT('medium'),
 			allowNull: true
 		},
 		site: {
@@ -68,11 +68,11 @@ module.exports = function (sequelize, DataTypes) {
 			allowNull: true
 		},
 		github_repo: {
-			type: DataTypes.LONGTEXT,
+			type: DataTypes.TEXT('long'),
 			allowNull: true
 		},
 		favorite_papers: {
-			type: DateTypes.TEXT,
+			type: DataTypes.TEXT,
 			allowNull: true
 		}
 	}, {

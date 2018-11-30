@@ -34,16 +34,16 @@ functions:
           path: hello
           method: get
   login:
-    handler: functions/login.handler
+    handler: controllers/login.handler
     events:
       - http:
           path: sessions
           method: post
           cors: true
   authorize:
-    handler: functions/authorize.handler
+    handler: controllers/authorize.handler
   getCats:
-    handler: functions/getCats.handler
+    handler: controllers/getCats.handler
     events:
       - http:
           path: cats
@@ -51,7 +51,7 @@ functions:
           cors: true
           # authorizer: authorize # Cats are public
   getPangolins:
-    handler: functions/getPangolins.handler
+    handler: controllers/getPangolins.handler
     events:
       - http:
           path: pangolins

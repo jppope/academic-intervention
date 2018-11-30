@@ -51,3 +51,4 @@ env.yml
 # Jetbrains IDEs
 .idea
 env.yml
+env.js
