@@ -25,11 +25,11 @@ module.exports = function (sequelize, DataTypes) {
 		},
 		group: {
 			type: DataTypes.STRING(255),
-			allowNull: false
+			allowNull: true
 		},
 		account: {
 			type: DataTypes.INTEGER(11),
-			allowNull: false
+			allowNull: true
 		},
 		verified: {
 			type: DataTypes.INTEGER(1),
@@ -53,7 +53,7 @@ module.exports = function (sequelize, DataTypes) {
 		},
 		show_email: {
 			type: DataTypes.TINYINT(1),
-			allowNull: false
+			allowNull: true
 		},
 		show_phone: {
 			type: DataTypes.TINYINT(1),

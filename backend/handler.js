@@ -1,21 +1,19 @@
 const db = require('./db');
 
 export const hello = async (event, context, callback) => {
-	let body = JSON.stringify(event.body);
-	console.log(db)
-	// db.todo.create({task: body.task})
-	// 	.then((todo) => {})
-				const response = {
+	// let body = JSON.stringify(event.body);
+	try {
+		await db.User.findOne().then((user) => {
+				console.log(user.dataValues)
+				callback(null, {
 					statusCode: 200,
 					body: JSON.stringify({
-						todo: db
+						user: user.dataValues
 					}),
-				};
-				callback(null, response);
-};
+				});
+			})
+	} catch (err){
+		callback(new Error(err));
+	}
 
-const message = ({ time, ...rest }) => new Promise((resolve, reject) =>
-  setTimeout(() => {
-    resolve(`${rest.copy} (with a delay)`);
-  }, time * 1000)
-);
+};
