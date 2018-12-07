@@ -58,93 +58,93 @@ functions:
           method: get
           cors: true
           authorizer: authorize # Pangolins are protected
-  usersList:
+  userList:
     handler: controllers/UserController.getUsers
     events:
       - http:
-          path: users
+          path: user
           method: get
-  usersGet:
+  userGet:
     handler: controllers/UserController.getUser
     events:
       - http:
-          path: users/{id}
+          path: user/{id}
           method: get
-  usersCreate:
+  userCreate:
     handler: controllers/UserController.createUser
     events:
       - http:
-          path: users
+          path: user
           method: post
-  usersUpdate:
+  userUpdate:
     handler: controllers/UserController.updateUser
     events:
       - http:
-          path: users/{id}
+          path: user/{id}
           method: put
-  usersDelete:
+  userDelete:
     handler: controllers/UserController.deleteUser
     events:
       - http:
-          path: users/{id}
+          path: user/{id}
           method: delete
-  papersList:
+  paperList:
     handler: controllers/PaperController.getPapers
     events:
       - http:
-          path: papers
+          path: paper
           method: get
-  papersGet:
+  paperGet:
     handler: controllers/PaperController.getPaper
     events:
       - http:
-          path: papers/{id}
+          path: paper/{id}
           method: get
-  papersCreate:
+  paperCreate:
     handler: controllers/PaperController.createPaper
     events:
       - http:
-          path: papers
+          path: paper
           method: post
-  papersUpdate:
+  paperUpdate:
     handler: controllers/PaperController.updatePaper
     events:
       - http:
-          path: papers/{id}
+          path: paper/{id}
           method: put
-  papersDelete:
+  paperDelete:
     handler: controllers/PaperController.deletePaper
     events:
       - http:
-          path: papers/{id}
+          path: paper/{id}
           method: delete
-  groupsList:
+  groupList:
     handler: controllers/GroupController.getGroups
     events:
       - http:
-          path: groups
+          path: group
           method: get
-  groupsGet:
+  groupGet:
     handler: controllers/GroupController.getGroup
     events:
       - http:
-          path: groups/{id}
+          path: group/{id}
           method: get
-  groupsCreate:
+  groupCreate:
     handler: controllers/GroupController.createGroup
     events:
       - http:
-          path: groups
+          path: group
           method: post
-  groupsUpdate:
+  groupUpdate:
     handler: controllers/GroupController.updateGroup
     events:
       - http:
-          path: groups/{id}
+          path: group/{id}
           method: put
-  groupsDelete:
+  groupDelete:
     handler: controllers/GroupController.deleteGroup
     events:
       - http:
-          path: groups/{id}
+          path: group/{id}
           method: delete
