@@ -1,5 +1,5 @@
 # NOTE: update this with your service name
-service: backend
+service: serverless-nodejs-starter
 
 # Use the serverless-webpack plugin to transpile ES6
 plugins:
@@ -17,47 +17,22 @@ provider:
   name: aws
   runtime: nodejs8.10
   stage: dev
-  region: us-west-2
+  region: us-east-1
+  profile: serverless-admin
   # To load environment variables externally
   # rename env.example to env.yml and uncomment
   # the following line. Also, make sure to not
   # commit your env.yml.
   #
-	environment: ${file(env.yml):${self:custom.stage}}
-
+  #environment: ${file(env.yml):${self:provider.stage}}
 
 functions:
   hello:
-    handler: handler.hello
+    handler: controllers/handler.hello
     events:
       - http:
           path: hello
           method: get
-  login:
-    handler: controllers/login.handler
-    events:
-      - http:
-          path: sessions
-          method: post
-          cors: true
-  authorize:
-    handler: controllers/authorize.handler
-  getCats:
-    handler: controllers/getCats.handler
-    events:
-      - http:
-          path: cats
-          method: get
-          cors: true
-          # authorizer: authorize # Cats are public
-  getPangolins:
-    handler: controllers/getPangolins.handler
-    events:
-      - http:
-          path: pangolins
-          method: get
-          cors: true
-          authorizer: authorize # Pangolins are protected
   usersList:
     handler: controllers/UserController.getUsers
     events:
