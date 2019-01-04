@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const users = require('../lib/users');
-
-const JWT_EXPIRATION_TIME = '5m';
+const secret = 'fakeTempSecret'
+const JWT_EXPIRATION_TIME = '365d';
 
 /**
   * POST /sessions
@@ -15,15 +15,16 @@ const JWT_EXPIRATION_TIME = '5m';
   */
 module.exports.handler = (event, context, callback) => {
   console.log('login');
-  const { username, password } = JSON.parse(event.body);
-
+  const { email, password } = JSON.parse(event.body);
+	console.log(email, password);
   try {
     // Authenticate user
-    const user = users.login(username, password);
+    const user = users.login(email, password);
     console.log(user);
 
     // Issue JWT  process.env.JWT_SECRET
-    const token = jwt.sign({ user }, 'shhhsecret', { expiresIn: JWT_EXPIRATION_TIME });
+    const token = jwt.sign({ user }, secret, { expiresIn: JWT_EXPIRATION_TIME });
+		// db.user.findOneAndUpdate({})
     console.log(`JWT issued: ${token}`);
     const response = { // Success response
       statusCode: 200,
