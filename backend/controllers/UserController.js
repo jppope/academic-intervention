@@ -1,30 +1,53 @@
 const Data = require('../Models/JsonDummyData.js');
 const Users = Data.users;
+const db = require('../db.js');
+// const sequelize = new Sequelize('academic_intervention', 'pope', 'burritos', {
+//   dialect: 'mysql'
+// })
 
 export const getUsers = async (event, context, callback) => {
-    // console.log(Users);
-    const response = {
-        statusCode: 200,
-        body: JSON.stringify({
-            message: Users,
-        }),
-    };
+  try {
+    await db.User.findAll().then(result => {
+        let dbUsers = result;
+       
+        const response = {
+          statusCode: 200,
+          body: JSON.stringify({
+            message: dbUsers,
+          }),
+        };
+        callback(null, response);
+     
+      });
+    }
+    catch(error) {
+      callback(new Error(error));
+    }
     
-    callback(null, response);
 };
 
 export const getUser = async (event, context, callback) => {
-  const response = {
-    statusCode: 200,
-    body: JSON.stringify({
-        message: Users.filter(x => {
-            return x.id == event.pathParameters.id}),
-    }),
-    };
-  callback(null, response);
+  try {
+    await db.User.findById(event.pathParameters.id).then(result => {
+        let dbUsers = result;
+       
+        const response = {
+          statusCode: 200,
+          body: JSON.stringify({
+            message: dbUsers,
+          }),
+        };
+        callback(null, response);
+     
+      });
+    }
+    catch(error) {
+      callback(new Error(error));
+    }
 };
 
 export const createUser = async (event, context, callback) => {
+  // TODO: build user endpoints to interact with database like /get does
     console.log(event);
     // event.body will have to post details. 
     // parse event.body contents and create new user from user model
