@@ -1,9 +1,9 @@
 <template>
 	<nav class="navbar" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
-    <a class="navbar-item" href="https://bulma.io">
-      Hello world
-    </a>
+		<!-- <router-link class="navbar-item">
+			Academic Intervention
+		</router-link> -->
     <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
@@ -12,15 +12,18 @@
   </div>
   <div id="navbarBasicExample" class="navbar-menu">
     <div class="navbar-start">
-      <a class="navbar-item">
-        Home
-      </a>
-      <a class="navbar-item">
+		<router-link to="/" class="navbar-item">
+			Academic Intervention
+		</router-link>
+      <!-- <a class="navbar-item">
         Documentation
-      </a>
+      </a> -->
+
+    </div>
+    <div class="navbar-end">
       <div class="navbar-item has-dropdown is-hoverable">
         <a class="navbar-link">
-          More
+          Project
         </a>
         <div class="navbar-dropdown">
           <a class="navbar-item">
@@ -38,16 +41,12 @@
           </a>
         </div>
       </div>
-    </div>
-    <div class="navbar-end">
       <div class="navbar-item">
         <div class="buttons">
-          <a class="button is-primary">
+          <!-- <a class="button is-primary">
             <strong>Sign up</strong>
-          </a>
-          <a class="button is-light">
-            Log in
-          </a>
+          </a> -->
+					<router-link to="login" class="button is-primary">Login</router-link>
         </div>
       </div>
     </div>

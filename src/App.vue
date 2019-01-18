@@ -1,7 +1,7 @@
 <template>
   <div id="app">
 		<navbar/>
-    <home msg="Welcome to Your Vue.js App"/>
+    <router-view></router-view>
   </div>
 </template>
 

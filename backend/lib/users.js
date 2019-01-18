@@ -1,5 +1,5 @@
 const db = require('../db');
-
+const bcrypt = require('bcryptjs');
 /**
   * Returns a user, given a username and valid password.
   *
@@ -10,21 +10,28 @@ const db = require('../db');
   * @returns {Object} user
   */
 const login = async (email, password) => {
+	let user = {};
+	let hasValidPassword = false;
 
-	// find the user
-	const user = await db.User.findOne({ email })
-		.then(user => user.dataValues);
+	try {
+		// find a user with credentials
+		user = await db.User.findAll({where: { email }})
+			.then(user => user[0].dataValues);
+	} catch (error) {
+		console.error(error)
+	}
 
-	console.log("the user has been found ==> ", user)
-
+	// validate user was found before going further
   if (!user) throw new Error('User not found!');
 
-	let hasValidPassword = false;
-	// bcrypt the incoming password and compare it to the stored password
-	bcrypt.compare(password, hash, function (err, res) {
-		// if res === true
-		hasValidPassword = res;
-	});
+
+	try {
+		// compare password to the stored password
+		await bcrypt.compare(password, user.password)
+			.then(res => hasValidPassword = res);
+	} catch (error) {
+		if(error) throw new Error("bcrypt aint workin");
+	}
 
   if (!hasValidPassword) throw new Error('Invalid password');
 	delete user.password

@@ -36,7 +36,7 @@ module.exports = function (sequelize, DataTypes) {
 			allowNull: false
 		},
 		remember_token: {
-			type: DataTypes.STRING(100),
+			type: DataTypes.STRING(255),
 			allowNull: true
 		},
 		deleted_at: {
