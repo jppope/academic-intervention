@@ -15,6 +15,7 @@ const JWT_EXPIRATION_TIME = '365d';
   * @returns {Object} jwt that expires in 5 mins
   */
 module.exports.handler = async (event, context, callback) => {
+	console.log(event.body);
   const { email, password } = JSON.parse(event.body);
 	let user = {};
   try {

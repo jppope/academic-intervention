@@ -22,6 +22,10 @@ const router = new Router({
 			path: '/paper',
 			name: 'paper',
 			component: Paper,
+			beforeEnter: (to, from, next) => {
+				next();
+				// next('/login')
+			}
 		},
 		{
 			path: '/login',
