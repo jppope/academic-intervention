@@ -1,14 +1,10 @@
 const Data = require('../Models/JsonDummyData.js');
 const Users = Data.users;
 const db = require('../db.js');
-// const sequelize = new Sequelize('academic_intervention', 'pope', 'burritos', {
-//   dialect: 'mysql'
-// })
 
 export const getUsers = async (event, context, callback) => {
   try {
-    await db.User.findAll().then(result => {
-        let dbUsers = result;
+    await db.User.findAll().then(dbUsers => {
        
         const response = {
           statusCode: 200,
@@ -27,10 +23,13 @@ export const getUsers = async (event, context, callback) => {
 };
 
 export const getUser = async (event, context, callback) => {
+  console.log('id is = !: ', event.pathParameters.id);
   try {
-    await db.User.findById(event.pathParameters.id).then(result => {
-        let dbUsers = result;
-       
+    await db.User.findById(event.pathParameters.id).then(dbUsers => {
+      
+        if(!dbUsers) {
+          dbUsers = 'no users found';
+        }
         const response = {
           statusCode: 200,
           body: JSON.stringify({
@@ -70,22 +69,13 @@ export const createUser = async (event, context, callback) => {
 };
 
 export const updateUser = async (event, context, callback) => {
-    //validate the new user data
-    let newUserData = JSON.parse(event.body);
-    //get the correct user based of path id
-    const userId = event.pathParameters.id;
-    let User =  Users.filter(x => {
-            return x.id == userId});
+    //TODO: allow users to update their settings, email
 
-    console.log(User);
-    //update the fields via the model, and save user
-
-    //return updated user or throw error
-
+      let userMessage = 'endpoint in progress';
   const response = {
     statusCode: 200,
     body: JSON.stringify({
-       message: User
+       message: userMessage 
     }),
   };
 
@@ -94,15 +84,15 @@ export const updateUser = async (event, context, callback) => {
 };
 
 export const deleteUser = async (event, context, callback) => {
-    const userId = event.pathParameters.id;
-    //validate request, and verify delete permissions
-    
-    //get user model, and delete it.
-    //return success
+  //TODO: Allow deletion of users, but restrict with ACL (access control list)
+  // or some sort of permissions.
+
+      let userMessage = 'endpoint in progress';
+
   const response = {
     statusCode: 200,
     body: JSON.stringify({
-       message: 'deleted user ' + userId,
+       message: userMessage 
     }),
   };
 

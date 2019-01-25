@@ -1,5 +1,5 @@
 module.exports = function (sequelize, DataTypes) {
-	return sequelize.define('users', {
+	return sequelize.define('group', {
 		id: {
 			type: DataTypes.INTEGER(10).UNSIGNED,
 			allowNull: false,
@@ -15,19 +15,11 @@ module.exports = function (sequelize, DataTypes) {
 			allowNull: false,
 			unique: true
 		},
-		password: {
-			type: DataTypes.STRING(1024),
-			allowNull: false
-		},
 		phone: {
 			type: DataTypes.STRING(255),
 			allowNull: false
 		},
-		group: {
-			type: DataTypes.STRING(255),
-			allowNull: true
-		},
-		account: {
+        address_id: {
 			type: DataTypes.INTEGER(11),
 			allowNull: true
 		},
@@ -35,22 +27,14 @@ module.exports = function (sequelize, DataTypes) {
 			type: DataTypes.INTEGER(1),
 			allowNull: false
 		},
-		remember_token: {
-			type: DataTypes.STRING(1024),
-			allowNull: true
-		},
-		deleted_at: {
+		founded: {
 			type: DataTypes.DATE,
 			allowNull: true
-		},
-		created_at: {
-			type: DataTypes.DATE,
-			allowNull: true
-		},
-		updated_at: {
-			type: DataTypes.DATE,
-			allowNull: true
-		},
+        },
+        single_point_of_contact: {
+            type: DataTypes.STRING(255),
+            allowNull:true
+        },
 		show_email: {
 			type: DataTypes.TINYINT(1),
 			allowNull: true
@@ -74,8 +58,20 @@ module.exports = function (sequelize, DataTypes) {
 		favorite_papers: {
 			type: DataTypes.TEXT,
 			allowNull: true
-		}
+		},
+		deleted_at: {
+			type: DataTypes.DATE,
+			allowNull: true
+		},
+		created_at: {
+			type: DataTypes.DATE,
+			allowNull: true
+		},
+		updated_at: {
+			type: DataTypes.DATE,
+			allowNull: true
+		},
 	}, {
-		tableName: 'users'
+		tableName: 'group'
 	});
 };
