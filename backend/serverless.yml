@@ -33,6 +33,8 @@ functions:
       - http:
           path: hello
           method: get
+  createUser:
+    handler: controllers/createUser.handler
   login:
     handler: controllers/login.handler
     events:

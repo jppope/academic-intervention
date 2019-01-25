@@ -11,5 +11,6 @@ const db = {
 	Paper,
 	Group
 }
+// don't fucking put this object => {force: true} into the sync
 db.sequelize.sync();
 module.exports = db;

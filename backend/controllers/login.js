@@ -1,7 +1,8 @@
+const db = require('../db');
 const jwt = require('jsonwebtoken');
 const users = require('../lib/users');
-
-const JWT_EXPIRATION_TIME = '5m';
+const secret = 'fakeTempSecret'
+const JWT_EXPIRATION_TIME = '365d';
 
 /**
   * POST /sessions
@@ -13,31 +14,13 @@ const JWT_EXPIRATION_TIME = '5m';
   * @throws Returns 401 if the user is not found or password is invalid.
   * @returns {Object} jwt that expires in 5 mins
   */
-module.exports.handler = (event, context, callback) => {
-  console.log('login');
-  const { username, password } = JSON.parse(event.body);
-
+module.exports.handler = async (event, context, callback) => {
+  const { email, password } = JSON.parse(event.body);
+	let user = {};
   try {
     // Authenticate user
-    const user = users.login(username, password);
-    console.log(user);
-
-    // Issue JWT  process.env.JWT_SECRET
-    const token = jwt.sign({ user }, 'shhhsecret', { expiresIn: JWT_EXPIRATION_TIME });
-    console.log(`JWT issued: ${token}`);
-    const response = { // Success response
-      statusCode: 200,
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-      },
-      body: JSON.stringify({
-        token,
-      }),
-    };
-
-    // Return response
-    console.log(response);
-    callback(null, response);
+    user = await users.login(email, password);
+    console.log("USER DATA", user);
   } catch (e) {
     console.log(`Error logging in: ${e.message}`);
     const response = { // Error response
@@ -49,6 +32,39 @@ module.exports.handler = (event, context, callback) => {
         error: e.message,
       }),
     };
-    callback(null, response);
+    callback(response);
   }
+
+	try {
+		// Issue JWT  process.env.JWT_SECRET
+		const token = jwt.sign({ user }, secret, { expiresIn: JWT_EXPIRATION_TIME });
+		console.log(token, {email});
+		await db.User.update({ remember_token: token }, { where: { email }})
+			.then((rowsUpdated) => {
+				console.log(rowsUpdated);
+			})
+			console.log(`JWT issued: ${token}`);
+		const response = { // Success response
+			statusCode: 200,
+			headers: {
+				'Access-Control-Allow-Origin': '*',
+			},
+			body: JSON.stringify({
+				token
+			}),
+		};
+		// Return response
+		callback(null, response);
+	} catch (e) {
+		console.log(`Error logging in: ${e.message}`);
+		callback({
+			statusCode: 401,
+			headers: {
+				'Access-Control-Allow-Origin': '*',
+			},
+			body: JSON.stringify({
+				error: e.message
+			}),
+		});
+	}
 };
