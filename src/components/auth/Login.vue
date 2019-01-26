@@ -23,7 +23,7 @@
                     Password
                   </label>
                   <p class="control">
-                    <input class="input" type="password" placeholder="●●●●●●●" v-model="user.password">
+                    <input class="input" type="input" placeholder="●●●●●●●" v-model="user.password">
                   </p>
                 </div>
                 <br>

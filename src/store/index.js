@@ -12,6 +12,8 @@ import axios from 'axios';
 import router from '../router/index';
 
 axios.defaults.baseURL = 'http://localhost:3000';
+// axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+axios.defaults.headers.common['Accept'] = 'application/json';
 axios.interceptors.request.use(
 	(config) => {
 		let token = localStorage.getItem('token');
@@ -100,7 +102,8 @@ const actions = {
 		router.replace('/home');
 	},
 	login: (context, creds) => {
-		axios.post('http://127.0.0.1:3000/auth', creds)
+		let user = JSON.parse(JSON.stringify(creds));
+		axios.post('http://127.0.0.1:3000/auth', user, {})
 			.then((response) => {
 				console.log(response);
 				var now = new Date();
