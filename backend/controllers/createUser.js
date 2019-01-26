@@ -11,6 +11,7 @@ module.exports.handler = async (event, context, callback) => {
 	try {
 		await bcrypt.hash(user.password, 10, (err, hash) => {
 			user.password = hash;
+			console.log(hash);
 			return db.User.create(user)
 				.then(newUser => callback(null, response(`User ${newUser.name} created.`)))
 				.catch(err => callback(new Error(err)));

@@ -20,15 +20,18 @@ const login = async (email, password) => {
 	} catch (error) {
 		console.error(error)
 	}
+	console.log(user, email, password)
 
 	// validate user was found before going further
   if (!user) throw new Error('User not found!');
 
-
 	try {
 		// compare password to the stored password
 		await bcrypt.compare(password, user.password)
-			.then(res => hasValidPassword = res);
+			.then((res) => {
+				console.log("HOW DO THEY COMPARE", res)
+				hasValidPassword = res
+			});
 	} catch (error) {
 		if(error) throw new Error("bcrypt aint workin");
 	}
