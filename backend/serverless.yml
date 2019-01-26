@@ -39,7 +39,7 @@ functions:
     handler: controllers/login.handler
     events:
       - http:
-          path: sessions
+          path: auth
           method: post
           cors: true
   authorize:

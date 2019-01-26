@@ -15,7 +15,7 @@
                 <div class="field">
                   <label class="label">Email Address</label>
                   <p class="control">
-                    <input class="input" type="text" placeholder="username@something.org" v-model="user.username">
+                    <input class="input" type="text" placeholder="username@something.org" v-model="user.email">
                   </p>
                 </div>
                 <div class="field">
@@ -23,7 +23,7 @@
                     Password
                   </label>
                   <p class="control">
-                    <input class="input" type="password" placeholder="●●●●●●●" v-model="user.password">
+                    <input class="input" type="input" placeholder="●●●●●●●" v-model="user.password">
                   </p>
                 </div>
                 <br>
@@ -58,7 +58,7 @@
     data() {
       return {
         user: {
-          username: '',
+          email: '',
           password: '',
         },
       };

@@ -2,29 +2,30 @@
   <section class="section">
 		<div class="container">
 			<div class="notification">
-				Example
+				{{ hidden }}
 			</div>
 		</div>
   </section>
 </template>
 
 <script>
-import find from './parts/Find'
-import org from './parts/OrgPanel'
-import people from './parts/PeoplePanel'
-import paper from './parts/PaperPanel'
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
   name: 'HelloWorld',
-	components: {
-		find,
-		org,
-		people,
-		paper
-	},
+	components: {},
   props: {
     msg: String
-  }
+  },
+	computed: {
+		...mapGetters(['hidden'])
+	},
+	methods: {
+		...mapActions(['getRestricted']),
+	},
+	mounted(){
+		this.getRestricted();
+	}
 }
 </script>
 

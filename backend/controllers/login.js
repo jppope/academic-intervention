@@ -3,7 +3,9 @@ const jwt = require('jsonwebtoken');
 const users = require('../lib/users');
 const secret = 'fakeTempSecret'
 const JWT_EXPIRATION_TIME = '365d';
-
+const tok = require('../utils/token');
+// const res = require('../utils/response');
+import err from '../utils/error';
 /**
   * POST /sessions
   *
@@ -15,56 +17,38 @@ const JWT_EXPIRATION_TIME = '365d';
   * @returns {Object} jwt that expires in 5 mins
   */
 module.exports.handler = async (event, context, callback) => {
+	console.log("event body =>>", event.body);
   const { email, password } = JSON.parse(event.body);
 	let user = {};
+	let token = '';
+	console.log("====================================")
   try {
     // Authenticate user
     user = await users.login(email, password);
-    console.log("USER DATA", user);
-  } catch (e) {
-    console.log(`Error logging in: ${e.message}`);
-    const response = { // Error response
-      statusCode: 401,
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-      },
-      body: JSON.stringify({
-        error: e.message,
-      }),
-    };
-    callback(response);
-  }
-
-	try {
-		// Issue JWT  process.env.JWT_SECRET
-		const token = jwt.sign({ user }, secret, { expiresIn: JWT_EXPIRATION_TIME });
-		console.log(token, {email});
+		console.log("USER =>>", user);
+	 	token = jwt.sign({ user }, secret, { expiresIn: JWT_EXPIRATION_TIME });
+		console.log("====================================")
+		console.log("Token",token)
+		console.log("====================================")
 		await db.User.update({ remember_token: token }, { where: { email }})
 			.then((rowsUpdated) => {
 				console.log(rowsUpdated);
+				return;
 			})
-			console.log(`JWT issued: ${token}`);
-		const response = { // Success response
-			statusCode: 200,
-			headers: {
-				'Access-Control-Allow-Origin': '*',
-			},
-			body: JSON.stringify({
-				token
-			}),
-		};
-		// Return response
-		callback(null, response);
-	} catch (e) {
-		console.log(`Error logging in: ${e.message}`);
-		callback({
-			statusCode: 401,
-			headers: {
-				'Access-Control-Allow-Origin': '*',
-			},
-			body: JSON.stringify({
-				error: e.message
-			}),
-		});
-	}
+  } catch (e) {
+    console.log(`Error logging in: ${e.message}`);
+		let errRes = err(e.message);
+    callback(errRes);
+  }
+
+	callback(null, {
+		statusCode: 200,
+		headers: {
+			'Access-Control-Allow-Origin': '*',
+			'Access-Control-Allow-Credentials': true,
+		},
+		body: JSON.stringify({
+			token,
+		}),
+	});
 };
