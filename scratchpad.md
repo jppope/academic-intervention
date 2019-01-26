@@ -46,4 +46,4 @@ User has many Organizations  <=> Organizations have many Users
 
 
 User Example:
-{ "user": { "name": "serious user", "email": "jonpaul.act@gmail.com", "password": "passturd", "phone": "215.512.1089", "group": "test group", "account": 0, "verified": 0, "remember_token": null, "show_email": 0, "show_phone": null, "desc": null, "site": null, "github_repo": null, "favorite_papers": null }}
+serverless invoke local -f createUser -d '{ "user": { "name": "serious user", "email": "jonpaul.act@gmail.com", "password": "BreakfastBurritos1!", "phone": "215.512.1089", "group": "test group", "account": 0, "verified": 0, "remember_token": null, "show_email": 0, "show_phone": null, "desc": null, "site": null, "github_repo": null, "favorite_papers": null }}'
