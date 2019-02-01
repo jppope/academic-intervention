@@ -21,8 +21,6 @@ const authorizeUser = (userScopes, methodArn) => {
   * @throws Returns 403 if the token does not have sufficient permissions.
   */
 module.exports.handler = (event, context, callback) => {
-  console.log('authorize');
-  // console.log(event);
   let token = event.authorizationToken;
   if (token.startsWith('Bearer ')) {
   	// Remove Bearer from string
@@ -32,13 +30,13 @@ module.exports.handler = (event, context, callback) => {
   try {
     // Verify JWT process.env.JWT_SECRET
     const decoded = jwt.verify(token, secret);
-    console.log("decoded check", JSON.stringify(decoded));
 
     // Checks if the user's scopes allow her to call the current endpoint ARN
     const user = decoded.user;
-    // const isAllowed = authorizeUser(user.scopes, event.methodArn);
+		// for now... not doing access control levels
+			// const isAllowed = authorizeUser(user.scopes, event.methodArn);
 		let isAllowed = true;
-		console.log(user)
+
     // Return an IAM policy document for the current endpoint
     const effect = isAllowed ? 'Allow' : 'Deny';
     // const userId = user.username;

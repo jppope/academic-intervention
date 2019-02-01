@@ -43,13 +43,28 @@
       </div>
       <div class="navbar-item">
         <div class="buttons">
-          <!-- <a class="button is-primary">
-            <strong>Sign up</strong>
-          </a> -->
-					<router-link to="login" class="button is-primary">Login</router-link>
+          <a class="button is-primary" v-show="isLoggedIn" @click="logout">
+            <strong>Logout</strong>
+          </a>
+					<span v-show="!isLoggedIn">
+						<router-link to="login" class="button is-primary">Login</router-link>
+					</span>
         </div>
       </div>
     </div>
   </div>
 </nav>
 </template>
+<script>
+import { mapGetters, mapActions } from 'vuex';
+
+export default {
+	computed: {
+		...mapGetters(['isLoggedIn']),
+	},
+	methods: {
+		...mapActions(['logout']),
+	}
+}
+</script>
+

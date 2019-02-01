@@ -38,11 +38,9 @@ const getters = {
 
 const mutations = {
 	hiddenTest: (state, payload) => {
-		console.log(payload[0])
 		state.hidden = payload[0];
 	},
 	auth: (state, payload) => {
-		console.log(payload)
 		state.token = payload.token;
 		state.user = payload.user;
 		state.expiration = payload.expiration;
@@ -64,11 +62,8 @@ const actions = {
 		)
 	},
 	getRestricted: (context) => {
-
-		/* eslint-disable*/
 		axios.get('/pangolins')
 			.then((response) => {
-				// console.log(response.data)
 				context.commit('hiddenTest', response.data.pangolins)
 			})
 	},

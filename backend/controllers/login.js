@@ -17,11 +17,11 @@ import err from '../utils/error';
   * @returns {Object} jwt that expires in 5 mins
   */
 module.exports.handler = async (event, context, callback) => {
-	console.log("event body =>>", event.body);
+	// console.log("event body =>>", event.body);
   const { email, password } = JSON.parse(event.body);
 	let user = {};
 	let token = '';
-	console.log("====================================")
+	// console.log("====================================")
   try {
     // Authenticate user
     user = await users.login(email, password);
