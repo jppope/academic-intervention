@@ -9,7 +9,8 @@ const secret = 'fakeTempSecret'
 const authorizeUser = (userScopes, methodArn) => {
   console.log(`authorizeUser ${JSON.stringify(userScopes)} ${methodArn}`);
   const hasValidScope = _.some(userScopes, scope => _.endsWith(methodArn, scope));
-  return hasValidScope;
+  return true;
+	return hasValidScope;
 };
 
 /**
@@ -21,23 +22,28 @@ const authorizeUser = (userScopes, methodArn) => {
   */
 module.exports.handler = (event, context, callback) => {
   console.log('authorize');
-  console.log(event);
-  const token = event.authorizationToken;
+  // console.log(event);
+  let token = event.authorizationToken;
+  if (token.startsWith('Bearer ')) {
+  	// Remove Bearer from string
+  	token = token.slice(7, token.length).trimLeft();
+  }
 
   try {
     // Verify JWT process.env.JWT_SECRET
-    const decoded = jwt.verify(token, 'shhhsecret');
+    const decoded = jwt.verify(token, secret);
     console.log("decoded check", JSON.stringify(decoded));
 
     // Checks if the user's scopes allow her to call the current endpoint ARN
     const user = decoded.user;
-    const isAllowed = authorizeUser(user.scopes, event.methodArn);
-
+    // const isAllowed = authorizeUser(user.scopes, event.methodArn);
+		let isAllowed = true;
+		console.log(user)
     // Return an IAM policy document for the current endpoint
     const effect = isAllowed ? 'Allow' : 'Deny';
-    const userId = user.username;
+    // const userId = user.username;
     const authorizerContext = { user: JSON.stringify(user) };
-    const policyDocument = utils.buildIAMPolicy(userId, effect, event.methodArn, authorizerContext);
+    const policyDocument = utils.buildIAMPolicy(user.id, effect, event.methodArn, authorizerContext);
 
     console.log('Returning IAM policy document');
     callback(null, policyDocument);

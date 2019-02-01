@@ -28,16 +28,18 @@ const state = {
 	isLoggedIn: false,
 	token: '',
 	user: {},
-	hidden: '',
+	hidden: {},
 }
 
 const getters = {
+	hidden: (state) => state.hidden,
 	isLoggedIn: (state) => state.isLoggedIn,
 }
 
 const mutations = {
 	hiddenTest: (state, payload) => {
-		state.hidden = JSON.stringify(payload);
+		console.log(payload[0])
+		state.hidden = payload[0];
 	},
 	auth: (state, payload) => {
 		console.log(payload)
@@ -66,7 +68,8 @@ const actions = {
 		/* eslint-disable*/
 		axios.get('/pangolins')
 			.then((response) => {
-				console.log(response.data)
+				// console.log(response.data)
+				context.commit('hiddenTest', response.data.pangolins)
 			})
 	},
 	// register: (context, creds) => {

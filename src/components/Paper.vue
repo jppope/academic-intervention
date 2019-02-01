@@ -1,8 +1,7 @@
 <template>
   <section class="section">
 		<div class="container">
-			<div class="notification">
-				{{ hidden }}
+			<div class="notification">{{hidden}}
 			</div>
 		</div>
   </section>

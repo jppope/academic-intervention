@@ -27,9 +27,6 @@ module.exports.handler = async (event, context, callback) => {
     user = await users.login(email, password);
 		console.log("USER =>>", user);
 	 	token = jwt.sign({ user }, secret, { expiresIn: JWT_EXPIRATION_TIME });
-		console.log("====================================")
-		console.log("Token",token)
-		console.log("====================================")
 		await db.User.update({ remember_token: token }, { where: { email }})
 			.then((rowsUpdated) => {
 				console.log(rowsUpdated);
