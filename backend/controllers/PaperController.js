@@ -49,12 +49,10 @@ export const createPaper = async (event, context, callback) => {
     // event.body will have to post details. 
     // parse event.body contents and create new paper from paper model
     let data = JSON.parse(event.body);
-    let result = null;
-    console.log('event body', event.body);
     //Write simple validation class where either model fields have required fields, etc... that we can call here.
     try{
 
-      result = await db.Paper.create({
+      let result = await db.Paper.create({
         "title": data.title, 
         "desc": data.desc, 
         "author": data.author, 
@@ -65,32 +63,29 @@ export const createPaper = async (event, context, callback) => {
         "verified": data.verified,
         "date_published": data.date_published,
       });
-  }
-  catch(error) {
-    callback(new Error(error));
-  }
-    
-  let response;
-  if(result) {
 
-    response = {
-      statusCode: 200,
+    const response = {
+      statusCode: 201,
       body: JSON.stringify({
         message: "created new paper " + data.title,
       }),
     };
-    
-  }
-  else {
-    response = {
-      statusCode: 400,
-      body: JSON.stringify({
-        message: "Could not create paper",
-      }),
-    };
-  }
 
   callback(null, response);
+ 
+  }
+  catch(error) {
+    console.log(error);
+    callback(new Error(error));
+    const response = {
+      statusCode: 400,
+      body: JSON.stringify({
+        message: "failed to create a paper",
+      }),
+    };
+ 
+  callback(null, response);
+  }
 };
 
 export const updatePaper = async (event, context, callback) => {
