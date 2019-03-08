@@ -43,14 +43,14 @@ module.exports = function (sequelize, DataTypes) {
 			type: DataTypes.DATE,
 			allowNull: true
 		},
-		created_at: {
-			type: DataTypes.DATE,
-			allowNull: true
-		},
-		updated_at: {
-			type: DataTypes.DATE,
-			allowNull: true
-		},	
+		// created_at: {
+		// 	type: DataTypes.DATE,
+		// 	allowNull: true
+		// },
+		// updated_at: {
+		// 	type: DataTypes.DATE,
+		// 	allowNull: true
+		// },
 	}, {
 		tableName: 'paper'
 	});

@@ -27,11 +27,15 @@ Vue.use(Vuex);
 const state = {
 	isLoggedIn: false,
 	token: '',
+	backend_url: '',
 	user: {},
 	hidden: {},
+	papers: []
 }
 
 const getters = {
+	papers: (state) => state.papers,
+	backend_url: (state) => state.backend_url,
 	hidden: (state) => state.hidden,
 	isLoggedIn: (state) => state.isLoggedIn,
 }
@@ -39,6 +43,9 @@ const getters = {
 const mutations = {
 	hiddenTest: (state, payload) => {
 		state.hidden = payload[0];
+	},
+	papers: (state, payload) => {
+		state.papers = payload;
 	},
 	auth: (state, payload) => {
 		state.token = payload.token;
@@ -65,6 +72,13 @@ const actions = {
 		axios.get('/pangolins')
 			.then((response) => {
 				context.commit('hiddenTest', response.data.pangolins)
+			})
+	},
+	getPapers: (context) => {
+		axios.get('/paper')
+			.then((response) => {
+				// console.log(response);
+				context.commit('papers', response.data.papers)
 			})
 	},
 	// register: (context, creds) => {

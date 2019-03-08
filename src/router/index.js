@@ -1,7 +1,8 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Home from '@/components/Home';
-import Paper from '@/components/Paper';
+import Paper from '@/components/papers/Papers';
+import Create from '@/components/papers/Create.vue'
 import Auth from '@/components/auth/Authentication';
 // import Confirm from '@/components/auth/Confirm';
 // import PasswordReset from '@/components/auth/PasswordReset';
@@ -19,9 +20,18 @@ const router = new Router({
 			component: Home,
 		},
 		{
-			path: '/paper',
+			path: '/papers',
 			name: 'paper',
 			component: Paper,
+			beforeEnter: (to, from, next) => {
+				next();
+				// next('/login')
+			}
+		},
+		{
+			path: '/papers/create',
+			name: 'create',
+			component: Create,
 			beforeEnter: (to, from, next) => {
 				next();
 				// next('/login')

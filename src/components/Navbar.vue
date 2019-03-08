@@ -41,6 +41,14 @@
           </a>
         </div>
       </div>
+			<div class="navbar-item">
+				<router-link to="/papers/create" class="button">
+					<span class="icon">
+						<i class="fas fa-plus-circle"></i>
+					</span>
+					&nbsp; Add Paper
+				</router-link>
+			</div>
       <div class="navbar-item">
         <div class="buttons">
           <a class="button is-primary" v-show="isLoggedIn" @click="logout">
