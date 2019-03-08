@@ -1,5 +1,5 @@
-const Data = require('../Models/JsonDummyData.js');
-const Users = Data.users;
+// const Data = require('../Models/JsonDummyData.js');
+// const Users = Data.users;
 const db = require('../db.js');
 
 export const getUsers = async (event, context, callback) => {

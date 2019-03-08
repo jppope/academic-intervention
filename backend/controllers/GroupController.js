@@ -1,35 +1,59 @@
 const Data = require('../Models/JsonDummyData.js');
 const Groups = Data.groups;
+const db = require('../db.js');
 
 export const getGroups = async (event, context, callback) => {
-    console.log(Groups);
-    const response = {
-        statusCode: 200,
-        body: JSON.stringify({
-            message: Groups,
-        }),
-    };
+  try {
+    await db.Group.findAll().then(dbGroups => {
+       
+        const response = {
+          statusCode: 200,
+          body: JSON.stringify({
+            message: dbGroups,
+          }),
+        };
+        callback(null, response);
+     
+      });
+    }
+    catch(error) {
+      callback(new Error(error));
+    }
     
-    callback(null, response);
 };
 
 export const getGroup = async (event, context, callback) => {
-  console.log(event.pathParameters.id);
-  const response = {
-    statusCode: 200,
-    body: JSON.stringify({
-        message: Groups.filter(x => {
-            return x.id == event.pathParameters.id}),
-    }),
-    };
-  callback(null, response);
+  try {
+    await db.Group.findById(event.pathParameters.id).then(dbGroup => {
+      
+        if(!dbGroup) {
+          dbGroup = 'no users found';
+        }
+        const response = {
+          statusCode: 200,
+          body: JSON.stringify({
+            message: dbGroup,
+          }),
+        };
+        callback(null, response);
+     
+      });
+    }
+    catch(error) {
+      callback(new Error(error));
+    }
 };
 
+
+
 export const createGroup = async (event, context, callback) => {
-    console.log(event);
+  console.log('body is: ', event.body);
+  let data = JSON.parse(event.body);
+
+    db.Group.create({name : data.name, email: data.email, phone: data.phone, single_point_of_contact: data.single_point_of_contact, desc: data.desc, site: data.site});
+    // TODO: process address
     // event.body will have to post details. 
     // parse event.body contents and create new user from user model
-    let data = JSON.parse(event.body);
 
     //Write simple validation class where either model fields have required fields, etc... that we can call here.
     

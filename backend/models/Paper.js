@@ -17,7 +17,6 @@ module.exports = function (sequelize, DataTypes) {
 		author: {
 			type: DataTypes.STRING(255),
 			allowNull: false,
-			unique: true
         },
         source_url: {
             type: DataTypes.STRING(255),
@@ -25,6 +24,10 @@ module.exports = function (sequelize, DataTypes) {
         },
 		site: {
 			type: DataTypes.STRING(255),
+			allowNull: true
+		},
+		rating_id: {
+			type: DataTypes.INTEGER(11),
 			allowNull: true
 		},
 		group_id: {
@@ -43,14 +46,14 @@ module.exports = function (sequelize, DataTypes) {
 			type: DataTypes.DATE,
 			allowNull: true
 		},
-		created_at: {
-			type: DataTypes.DATE,
-			allowNull: true
-		},
-		updated_at: {
-			type: DataTypes.DATE,
-			allowNull: true
-		},	
+		// created_at: {
+		// 	type: DataTypes.DATE,
+		// 	allowNull: true
+		// },
+		// updated_at: {
+		// 	type: DataTypes.DATE,
+		// 	allowNull: true
+		// },	
 	}, {
 		tableName: 'paper'
 	});
